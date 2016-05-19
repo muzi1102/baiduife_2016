@@ -1,0 +1,173 @@
+/* reset */
+*{
+	margin:0;
+	padding:0;
+	/* background-color:#ccc; */
+	list-style:none;
+	box-sizing:border-box;
+}
+/* header */
+.header{
+	width:100%;
+	background-color:#000;
+}
+.logo img{
+	width:100px;
+	height:50px;
+	padding:10px;
+}
+.nav ul{
+	position: absolute;
+    top: 0;
+    right: 15px;
+}
+/* .nav ul li{
+	text-align: center;
+    width: 60px;
+    display: block;
+    float: left;
+    padding: 20px 10px;
+} */
+.nav ul li{
+	display:inline-block;
+	padding:20px 10px;
+}
+.nav ul li a{
+	color:#fff;
+	text-decoration:none;
+}
+/* main */
+.main_content{
+	background-color:#ccc;
+	padding:10px 0;
+}
+article{
+	
+	margin:30px;
+	margin-right:520px;
+	border:1px solid #ccc;
+	background-color:#fff;
+	box-shadow:2px 1px 1px ;
+	padding:20px;
+	/* min-width:200px; */
+	overflow: hidden;
+	min-width:300px;
+}
+article:last-of-type{
+	margin-right:0;
+}
+article h1{
+	font-size:20px;
+	margin:10px 0;
+}
+article h2{
+	font-size:18px;
+	margin:10px 0;
+}
+p.time{
+	font-size:14px;
+	margin-bottom:10px;
+}
+p.details{
+	text-indent:1em;
+	line-height:1.5em;
+	color:#000;
+}
+article img{
+	margin-top:15px;
+	min-width:160px;
+	width:200px;
+}
+article ul{
+	margin-top:10px;
+}
+article ul li{
+	line-height:1.5em;
+}
+article.pic ul{
+	margin-left:20px;
+}
+article.pic li{
+	border:1px solid #ccc;
+	/* width:250px; */
+	width:25%;
+	height:250px;
+	text-align:center;
+	float:left;
+}
+article.pic li img{
+	width:80%;
+	height:80%;
+	display:block;
+	margin:0 auto;
+}
+.fixed{
+	position:absolute;
+	right:0;
+	width:500px;
+	top:68px;
+}
+table{
+	width:100%;
+	border-collapse: collapse;
+}
+table thead tr{
+	background-color:#000;
+	color:#fff;
+}
+table tbody tr:nth-last-child(1){
+	background-color:#ccc;
+}
+/* last article */
+h2.title{
+	border-left:3px solid #ccc;
+	padding-left:0.8em;
+}
+form{
+	width:80%;
+	height:auto;
+	margin:0 auto;
+	border:1px solid red;
+	min-width:150px;
+}
+form div{
+	margin:15px;
+}
+form label{
+	width:150px;
+	min-width: 100px;
+	display:inline-block;
+	text-align:right;
+	background-color:yellow;
+	margin-right:0.5em;
+	padding:0.4em 0;
+}
+label.personDes{
+	vertical-align:top;
+}
+form input{
+	padding:0.4em 0;
+}
+form textarea{
+	width:80%;
+	height:6em;
+}
+form p.warn{
+
+}
+.submitBtn{
+	width:100%;
+	border:0;
+	background-color:blue;
+	border-radius:5px;
+	color:#fff;
+	font-size:20px;
+}
+/* copyright */
+.copyright{
+	padding:20px;
+	text-align:center;
+	background-color:#000;
+	color:#fff;
+	width:100%;
+}
