@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+    #container div {
+        display: inline-block;
+        font-size: 30px;
+        text-align: center;
+        padding: 0 15px;
+        margin: 2px 0;
+        margin-right: 10px;
+        height: 50px;
+        line-height: 50px;
+        background-color: red;
+        color: #FFFFFF;
+    }
+    </style>
+</head>
+
+<body>
+    <input type="text">
+    <button id="leftCome">left come</button>
+    <button id="rightCome">right come</button>
+    <button id="leftOut">left out</button>
+    <button id="rightOut">right out</button>
+    <div id="container"></div>
+</body>
+<script>
+$(function() {
+    //input输入的数字
+    var str
+        //保存输入的数字
+    var data = [];
+    function isEmpty() {
+        if (data.length > 0) {
+            return false;
+        }
+    }
+
+    function render(data) {
+        $('#container').html('');
+        var html = "";
+        for (var i = 0; i < data.length; i++) {
+            html += '<div>' + data[i] + '</div>';
+        }
+        $('#container').append(html);
+    }
+
+    function leftUnShift() {
+        str = $('input').val();
+        //判断输入是否合法
+        if (/^\d+$/.test(str)) {
+            str = parseInt(str);
+            data.unshift(str);
+            render(data);
+        } else {
+            alert("输入必须为数字")
+        }
+    }
+
+    function rightUnShift() {
+        str = $('input').val();
+        //判断输入是否合法
+        if (/^\d+$/.test(str)) {
+            str = parseInt(str);
+            data.push(str);
+            render(data);
+        } else {
+            alert("输入必须为数字")
+        }
+    }
+
+    function leftPop() {
+        if (!isEmpty()) {
+            alert(data.shift());
+            render(data);
+        } else {
+            alert("没有可以删除的元素")
+        }
+    }
+
+    function rightPop() {
+        if (!isEmpty()) {
+            alert(data.pop());
+            render(data);
+        } else {
+            alert("没有可以删除的元素")
+        }
+    }
+    // 
+    $('#leftCome').on('click', function() {
+
+        leftUnShift();
+        $('input').val('')
+    })
+    $('#rightCome').on('click', function() {
+        rightUnShift();
+        $('input').val('')
+    })
+    $('#leftOut').on('click', function() {
+        leftPop();
+        $('input').val('')
+    })
+    $('#rightOut').on('click', function() {
+        rightPop();
+        $('input').val('')
+    })
+})
+</script>
+
+</html>
