@@ -42,12 +42,12 @@ $(function() {
     }
 
     function render(data) {
-        $('#container').html('');
         var html = "";
-        for (var i = 0; i < data.length; i++) {
-            html += '<div>' + data[i] + '</div>';
-        }
-        $('#container').append(html);
+        data.map(function(item){
+            html += '<div>' + item + '</div>';
+        })
+        $('#container').html(html);
+
     }
 
     function leftUnShift() {

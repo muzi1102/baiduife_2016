@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" media="screen">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    #result div {
+        margin: 10px;
+        padding: 5px;
+        background-color: red;
+        text-align: center;
+        float: left;
+        color: white;
+        font-weight: bold;
+    }
+    
+    .select {
+        color: blue;
+    }
+    </style>
+</head>
+
+<body>
+    <textarea name="txt" id='txt'></textarea>
+    <button type="button" class="button">确定</button>
+    <textarea name="search" id=search></textarea>
+    <button id='searchBtn'>查询</button>
+    <div id="result"></div>
+    <script>
+    window.onload = function() {
+        var result = document.querySelector('#result');
+        var Btn = document.querySelector('.button');
+        var txt = document.querySelector('#txt');
+        var searchTxt = document.querySelector('#search');
+        var searchBtn = document.getElementById('searchBtn');
+        var data = [];
+        Btn.onclick = function() {
+                data = getInputValue();
+                render();
+            }
+        searchBtn.onclick=function(){
+        	render(searchTxt.value);
+        }
+        function render(match) {
+            var html = '';
+            data.map(function(item) {
+                if (match != null && match.length > 0) {
+                    item = item.replace(new RegExp(match, 'g'), "<span class='select'>" + match + "</span>")
+                }
+                html += '<div>' + item + '</div>'
+            })
+            result.innerHTML=html;
+        }
+
+        function getInputValue() {
+            return txt.value.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(d) {
+                return d != '';
+            });
+        }
+    }
+    </script>
+</body>
+
+</html>
