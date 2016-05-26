@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" media="screen">
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .root {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #000;
+        margin: 5px;
+        padding: 15px 10px;
+        width: 730px;
+        height: 240px;
+        background-color: #FFFFFF;
+        margin-top: 100px;
+        margin-left: 100px;
+    }
+    
+    .son_1 {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #000;
+        margin: 5px;
+        padding: 15px 10px;
+        width: 350px;
+        height: 200px;
+        background-color: #FFFFFF;
+    }
+    
+    .son_2 {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #000;
+        margin: 5px;
+        padding: 15px 10px;
+        width: 150px;
+        height: 160px;
+        background-color: #FFFFFF;
+    }
+    
+    .son_3 {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #000;
+        margin: 5px;
+        padding: 15px 10px;
+        width: 70px;
+        height: 120px;
+        background-color: #FFFFFF;
+    }
+    
+    p {
+        margin: 100px;
+    }
+    
+    button {
+        margin: 20px;
+        padding: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="root">
+        <div class="son_1">
+            <div class="son_2">
+                <div class="son_3"></div>
+                <div class="son_3"></div>
+            </div>
+            <div class="son_2">
+                <div class="son_3"></div>
+                <div class="son_3"></div>
+            </div>
+        </div>
+        <div class="son_1">
+            <div class="son_2">
+                <div class="son_3"></div>
+                <div class="son_3"></div>
+            </div>
+            <div class="son_2">
+                <div class="son_3"></div>
+                <div class="son_3"></div>
+            </div>
+        </div>
+    </div>
+    <p>
+        <button>前序</button>
+        <button>中序</button>
+        <button>后序</button>
+        <select name="speed" id="speedSelect">
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+        </select>
+    </p>
+</body>
+<script>
+var btn = document.getElementsByTagName('button'),
+    root = document.querySelector('.root'),
+    speed
+var tree = new Tree();
+btn[0].onclick = function() {
+
+    tree._storage = [];
+    tree.preOrder(root);
+    tree.animation();
+}
+btn[1].onclick = function() {
+
+    tree._storage = [];
+    tree.centerOrder(root)
+    tree.animation();
+}
+btn[2].onclick = function() {
+    tree._storage = [];
+    tree.lastOrder(root)
+    tree.animation();
+}
+
+function Tree() {
+    this._storage = [];
+    this.isRunnig = false;
+}
+Tree.prototype.preOrder = function(node) {
+    this._storage.push(node);
+    if (node.firstElementChild) {
+        this.preOrder(node.firstElementChild);
+    }
+    if (node.lastElementChild) {
+        this.preOrder(node.lastElementChild);
+    }
+    return this._storage;
+}
+Tree.prototype.centerOrder = function(node) {
+    if (node.firstElementChild) {
+        this.centerOrder(node.firstElementChild);
+    }
+    this._storage.push(node)
+    if (node.lastElementChild) {
+        this.centerOrder(node.lastElementChild);
+    }
+    return this._storage;
+}
+Tree.prototype.lastOrder = function(node) {
+    if (node.firstElementChild) {
+        this.lastOrder(node.firstElementChild);
+    }
+    if (node.lastElementChild) {
+        this.lastOrder(node.lastElementChild);
+    }
+    this._storage.push(node);
+    return this._storage;
+}
+Tree.prototype.animation = function() {
+    var arr = this._storage,
+        i = 0,
+        speed = parseInt(document.querySelector('#speedSelect').value);
+    if (!this.isRunnig) {
+        this.isRunnig = true;
+        arr[i].style.backgroundColor = "yellow";
+        var timer = setInterval(function() {
+            if (i == arr.length - 1) {
+                arr[i].style.backgroundColor = "#fff";
+                clearInterval(timer);
+                this.isRunnig = false
+            } else {
+                ++i;
+                arr[i].style.backgroundColor = "yellow";
+                arr[i - 1].style.backgroundColor = "#fff";
+            }
+        }, speed)
+
+    }
+}
+</script>
+
+</html>

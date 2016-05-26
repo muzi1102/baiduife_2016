@@ -69,10 +69,7 @@ window.onload = function() {
                     var temp = data[i + 1];
                     data[i + 1] = data[i];
                     data[i] = temp;
-					// render();
-					
-					console.log(i1);
-					console.log(i2);
+					render();
 					swapped=true;
                 }
             }
