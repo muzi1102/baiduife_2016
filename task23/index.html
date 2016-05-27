@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    article {
+        width: 1100px;
+        margin: 50px auto;
+    }
+    
+    .graph div {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-around;
+        align-items: center;
+        border: 1px solid #000;
+        background-color: #fff;
+    }
+    
+    .root {
+        width: 100%;
+        height: 350px;
+    }
+    
+    .root div {
+        height: 80%;
+        margin: 0 10px;
+    }
+    
+    .operator {
+        margin: 20px 0;
+    }
+    
+    .operator button {
+        outline: none;
+        box-shadow: 3px 3px 10px #ccc;
+        padding: 5px;
+        background-color: #fff;
+        margin-right: 40px;
+    }
+    
+    .operator input {
+        outline: none;
+        height: 30px;
+        padding: 5px;
+    }
+    /*点击后的激活状态*/
+    
+    .graph .active {
+        background-color: #FEF9D1;
+    }
+    /*遍历中的过渡状态*/
+    
+    .graph .transition {
+        background-color: #ccc;
+    }
+    
+    .traversal,
+    .search,
+    .processNode {
+        margin: 10px 0;
+    }
+    p{
+    	margin: 100px;
+    }
+    p button{
+    	padding: 10px;
+    	margin-left:10px;
+    }
+    </style>
+</head>
+
+<body>
+    <article>
+        <h2>多叉树的遍历</h2>
+        <div class="graph">
+            <div class="root">
+                <div>
+                    <div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div>
+                        <div></div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <div></div>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <p><button id='traverseBF'>广度遍历</button><button id='traverseDF'>深度遍历</button></p>
+</body>
+<script>
+	window.onload=function(){
+		var root=document.querySelector('.graph'),
+			btnDF=document.querySelector('#traverseDF'),
+			btnBF=document.querySelector('#traverseBF');
+		function Tree() {
+			this.storage=[];
+			this.isRunning=false;
+		}
+		//广度遍历
+		Tree.prototype.traverseBF=function(node){
+			var queue=[];
+			queue.push(node);
+			currentNode=queue.shift();
+			while(currentNode){
+				for (var i = 0 ,len=currentNode.children.length; i<len;i++) {
+					queue.push(currentNode.children[i])
+					this.storage.push(currentNode.children[i]);
+				}
+				currentNode=queue.shift();
+			}
+		}
+		// 深度遍历
+		Tree.prototype.traverseDF=function(node){
+			var that=this;
+			(function recurse(currentNode){
+				for (var i = 0,length = currentNode.children.length; i < length; i++) {
+					recurse(currentNode.children[i]);
+					that.storage.push(currentNode.children[i])
+				}
+			})(node)
+		}
+		Tree.prototype.animation=function(){
+			var arr=this.storage,
+				len=arr.length,
+                that=this,
+				i=0;
+				arr[i].style.backgroundColor="yellow";
+			if (!that.isRunning) {
+				that.isRunning=true;
+				console.log('in')
+				var timer=setInterval(function(){
+					if (i==len-1) {
+						arr[i].style.backgroundColor="#fff";
+						clearInterval(timer);
+						that.isRunning=false;
+					}else{
+						++i;
+						arr[i].style.backgroundColor="yellow";
+						arr[i-1].style.backgroundColor="#fff";
+					}
+				},300)
+			}
+		}
+		var tree=new Tree();
+		btnBF.onclick=function(){
+			tree.storage=[];
+			tree.traverseBF(root);
+			tree.animation()
+		}
+		btnDF.onclick=function(){
+			tree.storage=[];
+			tree.traverseDF(root);
+			tree.animation()
+		}
+	}
+</script>
+</html>

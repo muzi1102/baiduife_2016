@@ -162,15 +162,16 @@ Tree.prototype.lastOrder = function(node) {
 Tree.prototype.animation = function() {
     var arr = this._storage,
         i = 0,
+        that=this,
         speed = parseInt(document.querySelector('#speedSelect').value);
-    if (!this.isRunnig) {
-        this.isRunnig = true;
+    if (!that.isRunnig) {
+        that.isRunnig = true;
         arr[i].style.backgroundColor = "yellow";
         var timer = setInterval(function() {
             if (i == arr.length - 1) {
                 arr[i].style.backgroundColor = "#fff";
                 clearInterval(timer);
-                this.isRunnig = false
+                that.isRunnig = false
             } else {
                 ++i;
                 arr[i].style.backgroundColor = "yellow";
