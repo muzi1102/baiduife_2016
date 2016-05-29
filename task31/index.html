@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>联动</title>
+    <style type="text/css" media="screen">
+    .selects {
+        width: 500px;
+        border: 1px solid #ccc;
+        margin: 0 auto;
+    }
+    
+    .options,
+    .school,
+    .company {
+        padding: 30px;
+    }
+    
+    .company {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="selects">
+        <div class="options">
+            <input type="radio" name="student" value="" checked="true">在校生
+            <input type="radio" name="work" value="">非在校生
+        </div>
+        <div class="school">
+            <span>学校</span>
+            <!-- render -->
+            <select class="areas"></select>
+            <select class="schools"></select>
+        </div>
+        <div class="company">
+            <label for="company">就业单位</label>
+            <input type="text" id='company'>
+        </div>
+    </div>
+</body>
+<script>
+window.onload = function() {
+	//动态的数据
+    var data = [{
+        area: '北京',
+        school: ['北京大学', '清华大学', '北京航空大学', '邮电大学']
+
+    }, {
+        area: '上海',
+        school: ['复旦大学', '同济大学', '上海交通大学']
+    }, {
+        area: '湖南',
+        school: ['中南大学', '湖南大学', '湖南商学院', '湖南师范大学']
+    }]
+    //select options
+    var areas = document.querySelector('.areas');
+    var schools = document.querySelector('.schools');
+    // radio
+    var school = document.querySelector('.school');
+    var company = document.querySelector('.company')
+
+    // selectclick
+    var input = document.getElementsByTagName('input');
+    input[0].onclick = function() {
+        input[1].checked = false;
+        school.style.display = 'block';
+        company.style.display = 'none'
+    }
+    input[1].onclick = function() {
+        input[0].checked = false;
+        school.style.display = 'none';
+        company.style.display = 'block'
+
+    }
+        
+    //linkage
+    areas.onchange=function(){
+    	var index=this.selectedIndex;
+    	schools.innerHTML=''
+    	render(data,schools,index)
+    }
+    /**
+     * [render 动态渲染select]
+     * @param  {[arrar]} data   [动态数据]
+     * @param  {[node]} target [动态生成的数据append的父节点]
+     * @param  {[num]} selectIndex [上一级select的index]
+     * @return {[type]}        [无]
+     */
+    function render(data, target,selectIndex) {
+        switch (target.className) {
+            case 'areas':
+                var htmlarea = ''
+                data.map(function(item) {
+                    htmlarea += '<option value=' + item.area + '>' + item.area + '</option>';
+                })
+                target.innerHTML += htmlarea;
+                break;
+            case 'schools':
+                var htmlschool = ''
+                data[selectIndex].school.map(function(item){
+                	htmlschool+='<option value='+item+'>'+item+'</option>'
+                })
+                target.innerHTML += htmlschool;   
+            default:
+                break;
+        }
+    }
+
+    function init() {
+        render(data, areas)
+        render(data, schools,0);
+    }
+    init();
+}
+</script>
+
+</html>
