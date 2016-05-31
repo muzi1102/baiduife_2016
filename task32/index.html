@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css" media="screen">
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .config {
+        margin-left: 10px;
+        width: 400px;
+        float: left;
+    }
+    
+    fieldset {
+    	width: 100%;
+        padding: 10px;
+        margin-bottom:5px;
+    }
+    .showForm{
+    	min-width: 600px;
+		margin-left: 450px;
+		margin-right: 100px;
+    }
+    .showForm h1{
+		border:2px solid #c1c1c1;
+		text-align: center;
+		padding: 10px 0;
+    }
+    .options{
+    	margin-top: 8px;
+    }
+    .options span{
+    	background-color: yellow;
+    	margin-right: 5px;
+		padding: 3px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="config">
+        <form>
+            <fieldset class="type_select">
+                <legend>类型</legend>
+                <label>
+                    <input name="type_select" type="radio" value="text" class="text" checked="checked">输入框</label>
+                <label>
+                    <input name="type_select" type="radio" value="radio" class="radio" >单选框</label>
+                <label>
+                    <input name="type_select" type="radio" value="checkbox" class="checkbox" >多选框</label>
+                <label>
+                    <input name="type_select" type="radio" value="select" class="select" >下拉框</label>
+                <label>
+                    <input name="type_select" type="radio" value="textare" class="textare" >文本域</label>
+            </fieldset>
+            <fieldset class="isRequired">
+                <legend>配置</legend>
+                <p>
+                    <label>名称:
+                        <input type="text" class="TextName" value="">
+                    </label>
+                </p>
+                <label>
+                    <input name="reRadio" type="radio" checked="checked" class="isRequired_yes">
+                    必填
+                </label>
+                <label>
+                    <input name="reRadio" type="radio" class="isRequired_no">
+                    选填
+                </label>
+            </fieldset>
+            <fieldset class="rules">
+            	<legend>规则</legend>
+            	<label ><input name="rulesRadio" class="txt" type="radio" checked="checked">文字</label>
+            	<label ><input name="rulesRadio" class="num" type="radio">数字</label>
+            	<label ><input name="rulesRadio" class="email" type="radio">邮箱</label>
+            	<label ><input name="rulesRadio" class="tel" type="radio">电话号码</label>
+            	<label ><input name="rulesRadio" class="password" type="radio">密码</label>
+            </fieldset>
+            <fieldset class="optionAdd">
+            	<legend>选项</legend>
+            	<input type="text" class="option" placeholder="输入后按回车键即可添加">
+            	<div class="options"></div>
+            </fieldset>
+            <fieldset class="limitLen">
+            	<legend>长度限制</legend>
+            	<label>
+            		字符范围:
+					<input type="number" name="quantity" min="4" max="8" value="4">
+					--
+					<input type="number" name="quantity" min="10" max="16" value="16">
+            	</label>
+            </fieldset>
+            <button type="button" class="addBtn">Add</button>
+        </form>
+    </div>
+    <div class="showForm">
+    	<h1>表单展示区</h1>
+		<div class="forms">
+			
+		</div>
+    </div>
+</body>
+<script type="text/javascript" src="js/dataProduceModule.js"></script>
+<script type="text/javascript" src="js/validate.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</html>
