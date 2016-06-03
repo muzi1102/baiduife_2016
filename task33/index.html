@@ -168,32 +168,46 @@
 			},
 			// 改变小块的位置
 			go:function(rotate){
-				if (canMove()) {
+				if (this.canMove()) {
 					switch (rotate) {
-						case :
-							// statements_1
+						case 0:
+							this.position.top-=1
+							this.init()
+							break;
+						case 90:
+						case -270:
+							this.position.left+=1;
+							this.init()
+							break;
+						case 180:
+						case -180:
+							this.position.top+=1;
+							this.init()
+							break;
+						case 270:
+						case -90:
+							this.position.left-=1;
+							this.init();
 							break;
 						default:
-							// statements_def
 							break;
 					}
 				}
 			},
 			// 向左转（逆时针旋转90度）
 			TunLef:function(){
-				if (this.i>3) {
-					this.i=0
+				if (this.i>=3) {
+					this.i=-1
 				}
 				++this.i;
 				var deg=this.i*(-90);
 				this.rotate=deg;
-				this.obj.style.transform='rotate('+deg+'deg)';
+				this.obj.style.transform='rotate('+(deg)+'deg)';
 			},
 			TunRig:function(){
-				if (this.i>3) {
-					this.i=0
+				if (this.i>=3) {
+					this.i=-1
 				}
-				// debugger;
 				++this.i;
 				var deg=this.i*(90);
 				this.rotate=deg;
@@ -201,23 +215,21 @@
 			},
 			TunBac:function(){
 				var deg=this.i*(180)
-				if (this.i>3) {
-					this.i=0
+				if (this.i>=3) {
+					this.i=-1
 				}
 				++this.i;
 				this.obj.style.transform='rotate('+deg+'deg)';
 			},
 			canMove:function(){
-				if (
-					(this.position.left==0&&this.rotate==90) ||
-					(this.position.left==0&&this.rotate==270)
-					(this.position.left==10&&this.rotate==90)||
-					(this.position.left==10&&this.rotate==-270)||
+				if ((this.position.left==0&&this.rotate==-90)||
 					(this.position.top==0&&this.rotate==0)||
-					(this.position.top==5&&this.rotate==180)
-					(this.position.top==5&&this.rotate==-180)
-					) {
-					return false
+					(this.position.left==9&&this.rotate==-270)||
+					(this.position.top==9&&this.rotate==-180)||
+					(this.position.left==0&&this.rotate==270)||
+					(this.position.top==9&&this.rotate==180)||
+					(this.position.left==9&&this.rotate==90)) {
+					return false;
 				}else{
 					return true;
 				}
@@ -242,7 +254,7 @@
 					move.TunBac();
 					break;
 				case 'GO':
-					move.go();
+					move.go(move.rotate);
 					break;
 				default:
 					break;
