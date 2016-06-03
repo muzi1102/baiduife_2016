@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>UI</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	.container{
+		width: 200px;
+		margin: 0 auto;
+	}
+	.container button{
+		padding: 10px 20px;
+	}
+	.dialog{
+		border: 1px solid #ccc;
+		position: absolute;
+		box-shadow: 1px 1px #fff;
+		background-color: #fff;	
+	}
+	.dialog .header{
+		width: 100%;
+		height: 50px;
+		text-align: center;
+		padding: 10px;
+		border-bottom: 1px solid #ccc;
+		cursor: move;
+		font: 24px "微软雅黑";
+	}
+	.dialog .txt{
+		font: 20px "黑体";
+		padding: 20px 15px;
+		margin: 10px 0;
+	}
+	.dialog .footer {
+		float: right;
+	}
+	.dialog .footer button{	
+		padding: 10px 15px;
+		margin-right: 10px;
+		border: 0;
+		border-radius: 5px;
+	}
+	button.confirm{
+		background-color: rgb(34, 185, 60);
+	}
+	button.cancel{
+		background-color:red;
+	}
+	.mask{
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		background-color: rgba(108, 108, 108, 0.701961);
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<button type="button">登陆</button>
+	</div>
+</body>
+<script type="text/javascript">
+	window.onload=function(){
+		function Dialog(content,width,height) {
+			this.content=content;
+			this.width=width ? this.width:500;
+			this.height=height ? this.height:250;
+			this.dialog=null
+		}
+		Dialog.prototype={
+			init:function (){
+				this.createDialog();
+				this.dragDialog();
+			},
+			createDialog:function(){
+				var html='';
+					html='<div class="mask"></div><div class="dialog"><div class="header">这是一个弹出层</div><div class="txt">'+this.content+'</div><div class="footer"><button class="confirm">确定</button><button class="cancel">取消</button></div></div>';
+					document.body.innerHTML=html;
+					this.dialog=document.querySelector('.dialog');
+					this.dialog.style.width=this.width+'px';
+					this.dialog.style.height=this.height+'px';
+					this.centerDialog();
+			},
+			centerDialog:function(){
+				this.dialog.style.left='50%';
+				this.dialog.style.top='50%';
+				var l=parseInt(this.width/2),
+					t=parseInt(this.height/2);
+				this.dialog.style.marginLeft=-l+'px';
+				this.dialog.style.marginTop=-t+'px';
+			},
+			dragDialog:function(){
+				var header=document.querySelector('.header');
+					header.onmousedown=function(e){
+						var disLeft=,
+							disTop=e.clientTop;
+							console.log(disLeft);
+					}
+			},
+			showDialog:function(){
+
+			},
+			hideDialog:function(){
+
+			}
+
+		}
+		var cxt="这是一个弹出层,点击遮罩或者按钮关闭,按住标题处可以拖动";
+		var dialog=new Dialog(cxt);
+		dialog.init();
+	}
+</script>
+</html>
